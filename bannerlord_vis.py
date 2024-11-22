@@ -126,17 +126,17 @@ class MyModel(Model):
         self.agents.shuffle_do("attack")
 
 
-def runner(model):
+def runner(model,n):
     # model = MyModel(10, 1, 2,2)
     num_archers = []
     num_axemen = []
-    for i in range(10):
+    for i in range(n):
         print("Step : ",i)
         num_archers.append(len([agent.unique_id for agent in model.agents if agent.type == "A"]))
         num_axemen.append(len([agent.unique_id for agent in model.agents if agent.type == "B"]))
         model.step()
-    plt.plot(range(10), num_archers, label="Archers", color="dodgerblue", linewidth=2, marker="o", markersize=4)
-    plt.plot(range(10), num_axemen, label="Axemen", color="orange", linewidth=2, marker="s", markersize=4)
+    plt.plot(range(n), num_archers, label="Archers", color="dodgerblue", linewidth=2, marker="o", markersize=4)
+    plt.plot(range(n), num_axemen, label="Axemen", color="orange", linewidth=2, marker="s", markersize=4)
     plt.legend(fontsize=12, loc="upper left", shadow=True, fancybox=True)
 
     # Add gridlines
@@ -154,6 +154,6 @@ if __name__ == "__main__":
     archer_damage = 50
     axeman_damage = 100
     model = MyModel(w, h, archers,axeman,archer_hp,archer_damage,axeman_hp,axeman_damage)
-    runner(model)
+    runner(model,n=Step)
 
 
